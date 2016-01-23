@@ -143,6 +143,8 @@ public class CardboardEye : MonoBehaviour {
     FixProjection(ref proj);
     FixProjection(ref realProj);
 
+	//Vuforia.VuforiaBehaviour.Instance.ApplyCorrectedProjectionMatrix(proj, eye == Cardboard.Eye.Left);
+	
     // Zoom the stereo cameras if requested.
     float lerp = Mathf.Clamp01(controller.matchByZoom) * Mathf.Clamp01(controller.matchMonoFOV);
     // Lerping the reciprocal of proj(1,1), so zoom is linear in frustum height not the depth.
