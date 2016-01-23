@@ -10,6 +10,6 @@ public class Float : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-	
+		transform.RotateAround (new Vector3 (0, 5, 10), Vector3.up, 1f);
 	}
 }

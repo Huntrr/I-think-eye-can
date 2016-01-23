@@ -4,7 +4,7 @@ using Vuforia;
 
 public class Loader : MonoBehaviour, ITrackableEventHandler {
 	private TrackableBehaviour mTrackableBehaviour;
-	private string current_model = "physics";
+	private string current_model = "chess";
 	private Transform myModelTrf;
 	private bool update = false;
 
@@ -26,6 +26,16 @@ public class Loader : MonoBehaviour, ITrackableEventHandler {
 	private Quaternion physics_rotate = Quaternion.identity;
 	private Vector3 physics_pos = new Vector3 (0f, 0f, 0f);
 
+	public Transform physics2;
+	private Vector3 physics2_size = new Vector3 (0.5f, 0.5f, 0.5f);
+	private Quaternion physics2_rotate = Quaternion.identity;
+	private Vector3 physics2_pos = new Vector3 (1.918f, 3.668f, 0.3180f);
+
+	public Transform glucose;
+	private Vector3 glucose_size = new Vector3 (0.5f, 0.5f, 0.5f);
+	private Quaternion glucose_rotate = Quaternion.Euler (new Vector3 (-0.9642f, 0.0976f, 1.6003f));
+	private Vector3 glucose_pos = new Vector3 (-1.836f, -0.902f, -0.241f);
+
 	void Start () {
 		mTrackableBehaviour = GetComponent<TrackableBehaviour>();
 		if (mTrackableBehaviour) {
@@ -39,8 +49,12 @@ public class Loader : MonoBehaviour, ITrackableEventHandler {
 			update = true;
 			if (current_model.Equals ("chess")) {
 				current_model = "skull";
-			} else if(current_model.Equals("skull")) {
+			} else if (current_model.Equals ("skull")) {
+				current_model = "physics2";
+			} else if (current_model.Equals ("physics2")) {
 				current_model = "physics";
+			} else if (current_model.Equals ("physics")) {
+				current_model = "glucose";
 			} else {
 				current_model = "chess";
 			}
@@ -84,6 +98,14 @@ public class Loader : MonoBehaviour, ITrackableEventHandler {
 				myModelTrf.localRotation = skull_rotate;
 				myModelTrf.localScale = skull_size;
 				break;
+			
+			case "physics2":
+				myModelTrf = GameObject.Instantiate (physics2) as Transform;
+				myModelTrf.parent = mTrackableBehaviour.transform;
+				myModelTrf.localPosition = physics2_pos;
+				myModelTrf.localRotation = physics2_rotate;
+				myModelTrf.localScale = physics2_size;
+				break;
 
 			case "physics":
 				myModelTrf = GameObject.Instantiate (physics) as Transform;
@@ -91,6 +113,14 @@ public class Loader : MonoBehaviour, ITrackableEventHandler {
 				myModelTrf.localPosition = physics_pos;
 				myModelTrf.localRotation = physics_rotate;
 				myModelTrf.localScale = physics_size;
+				break;
+
+			case "glucose":
+				myModelTrf = GameObject.Instantiate (glucose) as Transform;
+				myModelTrf.parent = mTrackableBehaviour.transform;
+				myModelTrf.localPosition = glucose_pos;
+				myModelTrf.localRotation = glucose_rotate;
+				myModelTrf.localScale = glucose_size;
 				break;
 			}
 
