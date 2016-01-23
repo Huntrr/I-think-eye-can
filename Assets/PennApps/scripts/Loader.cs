@@ -45,7 +45,7 @@ public class Loader : MonoBehaviour, ITrackableEventHandler {
 
 	void Update () {
 	
-		if (Input.anyKeyDown) {
+		if (Input.anyKeyDown && !Input.GetKeyDown("space")) {
 			update = true;
 			if (current_model.Equals ("chess")) {
 				current_model = "skull";

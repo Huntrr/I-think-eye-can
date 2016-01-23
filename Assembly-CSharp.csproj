@@ -80,6 +80,7 @@
      <Compile Include="Assets\Grapher3.cs" />
      <Compile Include="Assets\NewBehaviourScript.cs" />
      <Compile Include="Assets\PennApps\scripts\Chess.cs" />
+     <Compile Include="Assets\PennApps\scripts\DisableVR.cs" />
      <Compile Include="Assets\PennApps\scripts\Float.cs" />
      <Compile Include="Assets\PennApps\scripts\Loader.cs" />
      <Compile Include="Assets\PennApps\scripts\Test.cs" />
@@ -231,6 +232,9 @@
  </Reference>
  <Reference Include="Qualcomm.Vuforia.UnityExtensions">
  <HintPath>/Users/hunter/Projects/Unity/I-think-eye-can/Assets/Vuforia/Scripts/Internal/Qualcomm.Vuforia.UnityExtensions.dll</HintPath>
+ </Reference>
+ <Reference Include="NCalc">
+ <HintPath>/Users/hunter/Projects/Unity/I-think-eye-can/Assets/NCalc.dll</HintPath>
  </Reference>
   </ItemGroup>
   <ItemGroup>
