@@ -19,9 +19,6 @@ public class Chess : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		print ("AWDWD");
-		GameObject o = Instantiate (Resources.Load("Chess_Rock_B1"), new Vector3 (0, 0, 0), Quaternion.identity) as GameObject;
-		o.transform.parent = transform;
 	}
 	
 	// Update is called once per frame
