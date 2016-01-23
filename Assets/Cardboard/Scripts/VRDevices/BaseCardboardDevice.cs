@@ -45,7 +45,7 @@ BaseVRDevice
   private Queue<int> eventQueue = new Queue<int>();
 
   protected bool debugDisableNativeProjections = false;
-  protected bool debugDisableNativeDistortion = false;
+  protected bool debugDisableNativeDistortion = true;
   protected bool debugDisableNativeUILayer = false;
 
   public override bool SupportsNativeDistortionCorrection(List<string> diagnostics) {

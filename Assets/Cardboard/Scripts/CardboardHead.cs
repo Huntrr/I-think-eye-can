@@ -127,5 +127,6 @@ public class CardboardHead : MonoBehaviour {
     if (OnHeadUpdated != null) {
       OnHeadUpdated(gameObject);
     }
+	Vuforia.VuforiaBehaviour.Instance.UpdateState(false, true);
   }
 }

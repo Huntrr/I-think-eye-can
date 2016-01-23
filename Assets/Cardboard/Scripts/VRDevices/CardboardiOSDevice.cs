@@ -81,7 +81,7 @@ public class CardboardiOSDevice : BaseCardboardDevice {
   }
 
   public override void Init() {
-    isOpenGL = isOpenGLAPI();
+    isOpenGL = false;
     setSyncWithCardboardEnabled(Cardboard.SDK.SyncWithCardboardApp);
     base.Init();
     // For iOS don't use Drift Correction.
@@ -94,7 +94,7 @@ public class CardboardiOSDevice : BaseCardboardDevice {
   public void ShowOnboardingDialog() {
     if (debugOnboarding || !isOnboardingDone()) {
       debugOnboarding = false;
-      launchOnboardingDialog();
+//      launchOnboardingDialog();
       setOnboardingDone();
     }
   }
