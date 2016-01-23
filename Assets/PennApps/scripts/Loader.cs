@@ -85,7 +85,7 @@ public class Loader : MonoBehaviour, ITrackableEventHandler {
 				myModelTrf.localScale = skull_size;
 				break;
 
-			case "sphere":
+			case "physics":
 				myModelTrf = GameObject.Instantiate (physics) as Transform;
 				myModelTrf.parent = mTrackableBehaviour.transform;
 				myModelTrf.localPosition = physics_pos;
