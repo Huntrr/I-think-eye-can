@@ -1,11 +1,7 @@
 'use strict'; // puts us in strict mode (js in hard mode)
 
 // gets imports
-let _ = require('underscore');
-let User = require('./user');
 let chess = require('chess');
-
-let mongo = require('mongodb').MongoClient;
 
 /* This sets up a pure socket-io server.
  * Later in the guide we upgrade to a full
@@ -21,12 +17,10 @@ let path = require('path');
 let express = require('express');
 
 let app = express();
-app.use(express.static(path.join(__dirname, '../client')));
+app.use(express.static(path.join(__dirname, 'client')));
 
 app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'hjs');
-let routes = require('./routes');
-app.use('/', routes);
+app.set('view-engine', require('hjs'));
 
 // 404
 app.use( (req, res, next) => {
@@ -48,52 +42,23 @@ let server = app.listen(3000, () => {
 
 let io = require('socket.io')(server);
 
-
+io.on('connection', (socket) => {
   socket.on('MOVE', (data) => {
-    let user = users[socket.id];
-
-    let movement = {
-      piece: data.piece,
-      newPosition: data.position
-    };
-
-
-    mongo.connect(uri, function (err, db) {
-        let collection = db.collection('chess');
-        collection.insert({
-          piece: data.piece,
-          newPosition: data.position}, function(err, o) {
-              if (err) { console.warn(err.message); }
-        });
-    });
-
     io.emit('MOVE', {piece, newPosition}); // broadcast the message everywhere
   });
 
 
   socket.on('CPTR', (data) => {
-    let user = users[socket.id];
-
     let movement = {
       piece: data.piece,
       newPosition: data.position
     };
 
-    mongo.connect(uri, function (err, db) {
-        let collection = db.collection('chess');
-        collection.deleteOne({
-          piece: data.piece,
-         }, function(err, o) {
-              if (err) { console.warn(err.message); }
-        });
-    });
-
     io.emit('CPTR', piece); // broadcast the message everywhere
   });
 
   socket.on('RESET', (data) => {
-
       //reset game state
-
     io.emit('RESET'); // broadcast the message everywhere
   });
+});
