@@ -75,12 +75,14 @@ namespace Vuforia
             foreach (Renderer component in rendererComponents)
             {
                 component.enabled = true;
+				component.gameObject.tag = "Visible";
             }
 
             // Enable colliders:
             foreach (Collider component in colliderComponents)
             {
                 component.enabled = true;
+
             }
 
             Debug.Log("Trackable " + mTrackableBehaviour.TrackableName + " found");
@@ -95,6 +97,7 @@ namespace Vuforia
             // Disable rendering:
             foreach (Renderer component in rendererComponents)
             {
+				component.gameObject.tag = "Untagged";
                 component.enabled = false;
             }
 
