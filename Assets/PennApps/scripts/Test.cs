@@ -29,13 +29,14 @@ public class Test : MonoBehaviour {
 			} else {
 				equation = null;
 			}	
-				Element newElem = new Element (e.data.GetField ("type").ToString(),
+		Element newElem = new Element(
+				e.data.GetField ("type").ToString(),
 				Int32.Parse(e.data.GetField ("rotate").ToString()),
+				Int32.Parse(e.data.GetField ("zoom").ToString()),
 				Int32.Parse(e.data.GetField ("x").ToString()),
 				Int32.Parse(e.data.GetField ("y").ToString()),
 				Int32.Parse(e.data.GetField ("z").ToString()),
 				Int32.Parse(e.data.GetField ("rotate_rate").ToString()),
-				Int32.Parse(e.data.GetField ("zoom").ToString()),
 				equation);
 			Elements.Add (newElem); //when initialized, no new characteristics
 

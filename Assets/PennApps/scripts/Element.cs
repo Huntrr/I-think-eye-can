@@ -4,18 +4,18 @@
 	{
 		private string type;
 		private int rotate;
-		private int zoom;
+		private float zoom;
 		private int x;
 		private int y;
 		private int z;
 		private int rotate_rate;
 		private string equation;
 
-		public Element(string type, int rotate, int zoom, int x, int y, 
+		public Element(string type, int rotate, float zoom, int x, int y, 
 			int z, int rotate_rate, string equation) {
 			this.type = type;
 			this.rotate = rotate;
-			this.zoom = zoom; 
+			this.zoom = Math.Max(0.1f, zoom); 
 			this.x = x;
 			this.y = y;
 			this.z = z;
@@ -41,7 +41,7 @@
 		public int GetRotate() {
 			return this.rotate;
 		}
-		public int GetZoom() {
+		public float GetZoom() {
 			return this.zoom;
 		}
 		public int GetRotateRate() {

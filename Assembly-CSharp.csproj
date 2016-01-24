@@ -212,7 +212,6 @@
      <None Include="Assets\Vuforia\Shaders\VertexLitWithZ.shader" />
      <None Include="Assets\Plugins\Android\AndroidManifest.xml" />
      <None Include="Assets\readme_SDK.txt" />
-     <None Include="Assets\Ciloci.Flee.xml" />
      <None Include="Assets\license_3rdpartynotice.txt" />
      <None Include="Assets\SocketIO\readme.txt" />
      <None Include="Assets\Vuforia\Shaders\RenderVideoBackground.shader" />
@@ -233,14 +232,8 @@
  <Reference Include="UnityEngine.UI">
  <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>
- <Reference Include="Ciloci.Flee">
- <HintPath>/Users/hunter/Projects/Unity/I-think-eye-can/Assets/Ciloci.Flee.dll</HintPath>
- </Reference>
  <Reference Include="grammatica-1.6">
  <HintPath>/Users/hunter/Projects/Unity/I-think-eye-can/Assets/grammatica-1.6.dll</HintPath>
- </Reference>
- <Reference Include="NCalc">
- <HintPath>/Users/hunter/Projects/Unity/I-think-eye-can/Assets/NCalc.dll</HintPath>
  </Reference>
  <Reference Include="Qualcomm.Vuforia.UnityExtensions">
  <HintPath>/Users/hunter/Projects/Unity/I-think-eye-can/Assets/Vuforia/Scripts/Internal/Qualcomm.Vuforia.UnityExtensions.dll</HintPath>

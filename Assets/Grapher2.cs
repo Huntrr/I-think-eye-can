@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using NCalc;
 
 public class Grapher2 : MonoBehaviour {
 

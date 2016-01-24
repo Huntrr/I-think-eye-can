@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using NCalc;
 
 public class GrapherCUSTOM : MonoBehaviour {
 
@@ -56,12 +55,7 @@ public class GrapherCUSTOM : MonoBehaviour {
 		if(eq.Substring(0, 4).ToLower().Equals("[y]=")) {
 			string equation = eq.Substring (4);
 
-			Expression e = new Expression(equation);
-			e.Parameters ["X"] = p.x;
-			e.Parameters ["Z"] = p.z;
-			e.Parameters ["T"] = t;
-
-			return (float)(e.Evaluate ());
+			return 1;
 		}
 
 		return 0;

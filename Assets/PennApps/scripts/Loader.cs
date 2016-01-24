@@ -8,7 +8,7 @@ public class Loader : MonoBehaviour, ITrackableEventHandler {
 	public static bool shouldUpdate = true;
 	//private Transform myModelTrf;
 
-	class ElementContainer {
+	private class ElementContainer {
 		public Element element;
 		public Transform trans;
 		public Vector3 base_scale;
@@ -26,12 +26,15 @@ public class Loader : MonoBehaviour, ITrackableEventHandler {
 
 	private ArrayList Elements = new ArrayList ();
 
-	private Element fake_elem = new Element("physics", 0, 1, 0, 0, 0, 0, "");
-
-	private Vector3 cur_scale;
-	private Vector3 cur_pos;
-	private Quaternion cur_rotate;
-	//private bool update = false;
+	private Element[] fake_elems = {
+		new Element ("skull", 0, 1, 0, 0, 0, 0, null),
+		new Element ("glucose", 0, 1, 0, 0, 0, 0, null),
+		new Element ("chess", 0, 1, 0, 0, 0, 0, null),
+		new Element ("graph", 0, 1, 0, 0, 0, 0, "[Y]=[X]"),
+		new Element ("physics2", 0, 1, 0, 0, 0, 0, null),
+		new Element ("physics", 0, 1, 0, 0, 0, 0, null)
+	};
+	private int fake_index = 1;
 
 	public Transform chess;
 	private Vector3 chess_size = new Vector3 (4f, 4f, 4f);
@@ -76,11 +79,16 @@ public class Loader : MonoBehaviour, ITrackableEventHandler {
 	void Update () {
 		if (Test.Elements.Count > 0) {
 			if (shouldUpdate) {
-				OnTrackingFound ();
 				shouldUpdate = false;
+				Debug.Log ("Updating drawing");
+				OnTrackingFound ();
 			}
 		} else {
-			draw (GetContainer(fake_elem));
+			Debug.Log ("Not connected to server, drawing something else instead");
+			if (Input.anyKeyDown && !Input.GetKeyDown ("space")) {
+				fake_index = (fake_index + 1) % fake_elems.Length;
+				OnTrackingFound ();
+			}
 		}
 	}
 
@@ -96,12 +104,24 @@ public class Loader : MonoBehaviour, ITrackableEventHandler {
 	} 
 
 	private ElementContainer GetContainer(Element elem) {
+		if (elem == null) {
+			return null;
+		}
+
 		Transform trans;
 		Vector3 scale;
 		Vector3 pos;
 		Quaternion rotate;
 
-		switch (elem.GetType ().Substring (1, elem.GetType ().Length - 2)) {
+		string switchString = elem.GetType ();
+		if (switchString.Contains ("\"")) {
+			switchString = switchString.Substring (1, switchString.Length - 2);
+		}
+
+		Debug.Log (switchString);
+
+
+		switch (switchString) {
 			case "chess":
 				trans = GameObject.Instantiate (chess) as Transform;
 				trans.parent = mTrackableBehaviour.transform;
@@ -134,7 +154,8 @@ public class Loader : MonoBehaviour, ITrackableEventHandler {
 				scale = physics_size;
 				break;
 
-			case "glucose":
+		case "glucose":
+			Debug.Log ("TESSST");
 				trans = GameObject.Instantiate (glucose) as Transform;
 				trans.parent = mTrackableBehaviour.transform;
 				pos = glucose_pos;
@@ -158,7 +179,7 @@ public class Loader : MonoBehaviour, ITrackableEventHandler {
 	}
 
 	private void OnTrackingFound() {
-
+		Debug.Log ("TrackingFound");
 		foreach (ElementContainer ec in Elements) {
 			if (ec.trans != null) {
 				Destroy (ec.trans.gameObject);
@@ -166,15 +187,23 @@ public class Loader : MonoBehaviour, ITrackableEventHandler {
 		}
 
 		Elements = new ArrayList ();
-		foreach (Element elem in Test.Elements) {
-			
-			
-			ElementContainer ec = GetContainer (elem);
+		if (Test.Elements.Count > 0) {
+			Debug.Log ("Real elements");
 
-			if (elem != null) {
-				Elements.Add (ec);
+			foreach (Element elem in Test.Elements) {
+				ElementContainer ec = GetContainer (elem);
+
+				if (ec != null && elem != null) {
+					Elements.Add (ec);
+				}
 			}
+		} else {
+			Debug.Log ("Fake elements: " + fake_index + "/" + fake_elems.Length);
+			Debug.Log (fake_elems [fake_index]);
+			Debug.Log(GetContainer (fake_elems [fake_index]));
+			Elements.Add (GetContainer (fake_elems [fake_index]));
 		}
+			
 
 		foreach (ElementContainer ec in Elements) {
 			draw (ec);
@@ -192,8 +221,9 @@ public class Loader : MonoBehaviour, ITrackableEventHandler {
 	}
 
 	private void draw(ElementContainer ec) {
-		ec.trans.localPosition = ec.base_pos;
-		ec.trans.localScale = ec.base_scale;
-		ec.trans.localRotation = ec.base_rotate;
+		ec.trans.localPosition = ec.base_pos + new Vector3 (ec.element.GetX (), ec.element.GetY (), ec.element.GetZ ());
+		Debug.Log("DAWDAWDWDW: " + ec.element.GetZoom());
+		ec.trans.localScale = ec.base_scale * ec.element.GetZoom();
+		ec.trans.localRotation = Quaternion.Euler(ec.base_rotate.eulerAngles + (Vector3.up * ec.element.GetRotate()));
 	}
 }
