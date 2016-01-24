@@ -24,7 +24,7 @@ public class Test : MonoBehaviour {
 		removeObject (e);
 		print ("ADDING - " + e.name + ": " + e.data);
 			string equation;
-		Debug.Log (e.data.GetField ("type").ToString());
+		Debug.Log (e.name + " TYPE: " + e.data.GetField ("type").ToString());
 		if (e.data.GetField ("type").ToString().Equals("\"graph\"")) {
 				equation = (e.data.GetField ("equation").ToString());
 			if (equation.Contains ("\"")) {
@@ -33,14 +33,15 @@ public class Test : MonoBehaviour {
 			} else {
 				equation = null;
 			}	
+		print (e.data.GetField ("rotate").ToString () + "DEGREES");
 		Element newElem = new Element(
 				e.data.GetField ("type").ToString(),
-				Int32.Parse(e.data.GetField ("rotate").ToString()),
-				Int32.Parse(e.data.GetField ("zoom").ToString()),
-				Int32.Parse(e.data.GetField ("x").ToString()),
-				Int32.Parse(e.data.GetField ("y").ToString()),
-				Int32.Parse(e.data.GetField ("z").ToString()),
-				Int32.Parse(e.data.GetField ("rotate_rate").ToString()),
+			Int32.Parse(sanitize(e.data.GetField ("rotate").ToString())),
+			Int32.Parse(sanitize(e.data.GetField ("zoom").ToString())),
+			Int32.Parse(sanitize(e.data.GetField ("x").ToString())),
+			Int32.Parse(sanitize(e.data.GetField ("y").ToString())),
+			Int32.Parse(sanitize(e.data.GetField ("z").ToString())),
+			Int32.Parse(sanitize(e.data.GetField ("rotate_rate").ToString())),
 				equation);
 			Elements.Add (newElem); //when initialized, no new characteristics
 
@@ -51,6 +52,13 @@ public class Test : MonoBehaviour {
 		print ("----");
 
 		Loader.shouldUpdate = true;
+	}
+
+	public string sanitize(string str) {
+		if (str.Contains ("\"")) {
+			str = str.Substring (1, str.Length - 2);
+		}
+		return str;
 	}
 
 	public void removeObject(SocketIOEvent e) {

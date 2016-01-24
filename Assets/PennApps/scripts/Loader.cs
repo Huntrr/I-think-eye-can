@@ -55,9 +55,9 @@ public class Loader : MonoBehaviour, ITrackableEventHandler {
 	private Vector3 physics_pos = new Vector3 (0f, 0f, 0f);
 
 	public Transform physics2;
-	private Vector3 physics2_size = new Vector3 (1f, 1f, 1f);
+	private Vector3 physics2_size = new Vector3 (0.5f, 0.5f, 0.5f);
 	private Quaternion physics2_rotate = Quaternion.identity;
-	private Vector3 physics2_pos = new Vector3 (1.918f, 3.668f, 0.3180f);
+	private Vector3 physics2_pos = new Vector3 (1.965f, 3.6525f, 0.35f);
 
 	public Transform glucose;
 	private Vector3 glucose_size = new Vector3 (0.5f, 0.5f, 0.5f);
