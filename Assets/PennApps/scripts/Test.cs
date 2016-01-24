@@ -24,8 +24,12 @@ public class Test : MonoBehaviour {
 		removeObject (e);
 		print ("ADDING - " + e.name + ": " + e.data);
 			string equation;
-			if (e.data.GetField ("type").Equals("equation")) {
+		Debug.Log (e.data.GetField ("type").ToString());
+		if (e.data.GetField ("type").ToString().Equals("\"graph\"")) {
 				equation = (e.data.GetField ("equation").ToString());
+			if (equation.Contains ("\"")) {
+				equation = equation.Substring (1, equation.Length - 2);
+			}
 			} else {
 				equation = null;
 			}	

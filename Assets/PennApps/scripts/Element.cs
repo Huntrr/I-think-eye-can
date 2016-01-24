@@ -20,7 +20,7 @@
 			this.y = y;
 			this.z = z;
 			this.rotate_rate = rotate;
-			if(type.Equals("equation")) {
+			if(type.Equals("\"graph\"")) {
 				this.equation = equation;
 			}
 

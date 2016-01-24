@@ -1,8 +1,9 @@
 ﻿using UnityEngine;
+using AK;
 
 public class GrapherCUSTOM : MonoBehaviour {
 
-	public string funky = "[Y]=[X]";
+	public static string funky = "y=x";
 
 	[Range(10, 100)]
 	public int resolution = 10;
@@ -48,14 +49,19 @@ public class GrapherCUSTOM : MonoBehaviour {
 	}
 
 	private static float Custom (string eq, Vector3 p, float t) {
-		if (eq.Length < 4) {
+		if (eq.Length < 2) {
 			return 0;
 		}
 
-		if(eq.Substring(0, 4).ToLower().Equals("[y]=")) {
-			string equation = eq.Substring (4);
+		if(eq.Substring(0, 2).ToLower().Equals("y=")) {
+			string equation = eq.Substring (2);
 
-			return 1;
+			ExpressionSolver solver = new ExpressionSolver();
+			solver.SetGlobalVariable("x",p.x);
+			solver.SetGlobalVariable("z",p.z);
+			solver.SetGlobalVariable("t",t);
+			Expression value = solver.SymbolicateExpression(equation);
+			return (float)value.Evaluate ();
 		}
 
 		return 0;

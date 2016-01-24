@@ -80,6 +80,15 @@
      <Compile Include="Assets\Grapher3.cs" />
      <Compile Include="Assets\NewBehaviourScript.cs" />
      <Compile Include="Assets\PennApps\GrapherCUSTOM.cs" />
+     <Compile Include="Assets\PennApps\expressionsolver\CustomFunction.cs" />
+     <Compile Include="Assets\PennApps\expressionsolver\Exception.cs" />
+     <Compile Include="Assets\PennApps\expressionsolver\Expression.cs" />
+     <Compile Include="Assets\PennApps\expressionsolver\ExpressionSolver.cs" />
+     <Compile Include="Assets\PennApps\expressionsolver\SolverTools.cs" />
+     <Compile Include="Assets\PennApps\expressionsolver\Symbol.cs" />
+     <Compile Include="Assets\PennApps\expressionsolver\SymbolList.cs" />
+     <Compile Include="Assets\PennApps\expressionsolver\ValidityChecker.cs" />
+     <Compile Include="Assets\PennApps\expressionsolver\Variable.cs" />
      <Compile Include="Assets\PennApps\scripts\Chess.cs" />
      <Compile Include="Assets\PennApps\scripts\DisableVR.cs" />
      <Compile Include="Assets\PennApps\scripts\Element.cs" />

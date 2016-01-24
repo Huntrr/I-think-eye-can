@@ -55,7 +55,7 @@ public class Loader : MonoBehaviour, ITrackableEventHandler {
 	private Vector3 physics_pos = new Vector3 (0f, 0f, 0f);
 
 	public Transform physics2;
-	private Vector3 physics2_size = new Vector3 (0.5f, 0.5f, 0.5f);
+	private Vector3 physics2_size = new Vector3 (1f, 1f, 1f);
 	private Quaternion physics2_rotate = Quaternion.identity;
 	private Vector3 physics2_pos = new Vector3 (1.918f, 3.668f, 0.3180f);
 
@@ -163,12 +163,15 @@ public class Loader : MonoBehaviour, ITrackableEventHandler {
 				scale = glucose_size;
 				break;
 
-			case "graph":
-				trans = GameObject.Instantiate (graph) as Transform;
-				trans.parent = mTrackableBehaviour.transform;
-				pos = graph_pos;
-				rotate = graph_rotate;
-				scale = graph_size;
+		case "graph":
+			trans = GameObject.Instantiate (graph) as Transform;
+			trans.parent = mTrackableBehaviour.transform;
+			pos = graph_pos;
+			rotate = graph_rotate;
+			scale = graph_size;
+			Debug.Log (elem.GetEquation ());
+			GrapherCUSTOM.funky = elem.GetEquation ();
+			Debug.Log (GrapherCUSTOM.funky);
 				break;
 
 			default:
