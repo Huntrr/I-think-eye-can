@@ -1,9 +1,9 @@
 ﻿using UnityEngine;
 using NCalc;
 
-public class Grapher2 : MonoBehaviour {
+public class GrapherCUSTOM : MonoBehaviour {
 
-	public string funky = "[X]";
+	public string funky = "[Y]=[X]";
 
 	[Range(10, 100)]
 	public int resolution = 10;
@@ -39,7 +39,7 @@ public class Grapher2 : MonoBehaviour {
 		float t = Time.timeSinceLevelLoad;
 		for (int i = 0; i < points.Length; i++) {
 			Vector3 p = points[i].position;
-			p.y = Custom(funky, p / size, t) * 1.5f;
+			p.y = Custom(funky, p, t) * 1.5f;
 			points[i].position = p;
 			Color c = points[i].color;
 			c.g = p.y;
@@ -49,10 +49,19 @@ public class Grapher2 : MonoBehaviour {
 	}
 
 	private static float Custom (string eq, Vector3 p, float t) {
-		if(eq.Substring(0, 4).ToLower().Equals("[Y]=")) {
+		if (eq.Length < 4) {
+			return 0;
+		}
+
+		if(eq.Substring(0, 4).ToLower().Equals("[y]=")) {
 			string equation = eq.Substring (4);
 
-			return 0;
+			Expression e = new Expression(equation);
+			e.Parameters ["X"] = p.x;
+			e.Parameters ["Z"] = p.z;
+			e.Parameters ["T"] = t;
+
+			return (float)(e.Evaluate ());
 		}
 
 		return 0;
